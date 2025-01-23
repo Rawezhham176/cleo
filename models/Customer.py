@@ -4,7 +4,7 @@ from utils.extensions import db
 class Customer(db.Model):
     __tablename__ = "customer"
 
-    customer_id =     contract_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False, unique=True)
+    customer_id = contract_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False, unique=True)
     customer_name = db.Column(db.String(80), nullable=False)
     customer_surname = db.Column(db.String(80), nullable=False)
     customer_email = db.Column(db.String(80), nullable=True)

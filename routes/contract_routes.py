@@ -11,7 +11,9 @@ contracts_route = Blueprint("contracts", __name__)
 def get_contracts():
     user = get_jwt_identity()
     if not user:
-        return jsonify({"message": "Unauthorized access"}), 401
+        return jsonify({
+            "message": "Unauthorized access"
+        }), 401
     contracts = Contract.query.all()
     return jsonify(
         [
@@ -30,16 +32,24 @@ def get_contracts():
 def add_contract():
     user = get_jwt_identity()
     if not user:
-        return jsonify({"message": "Unauthorized access"}), 401
+        return jsonify({
+            "message": "Unauthorized access"
+        }), 401
     contract_data = request.json
     if not all([contract_data.get("contract_name"),
                 contract_data.get("customer_surname")]):
-        return jsonify({"message": "contract_name and customer_relation_id are required"}), 400
+        return jsonify({
+            "message": "contract_name and customer_relation_id are required"
+        }), 400
+
     customer_id = Customer.query.filter_by(customer_surname=contract_data["customer_surname"]).first().customer_id
     new_contract = Contract(
         contract_name=contract_data["contract_name"],
         customer_id=customer_id
     )
+
     db.session.add(new_contract)
     db.session.commit()
-    return jsonify({"message": "Contract created successfully"}), 201
+    return jsonify({
+        "message": "Contract created successfully"
+    }), 201

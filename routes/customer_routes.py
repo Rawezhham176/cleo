@@ -11,7 +11,9 @@ customer_route = Blueprint("customers", __name__)
 def get_customers():
     user = get_jwt_identity()
     if not user:
-        return jsonify({"message": "Unauthorized access"}), 401
+        return jsonify({
+            "message": "Unauthorized access"
+        }), 401
     customers = Customer.query.all()
     return jsonify(
         [
@@ -32,7 +34,9 @@ def get_customers():
 def get_contracts_by_customer_id(customer_id):
     user = get_jwt_identity()
     if not user:
-        return jsonify({"message": "Unauthorized access"}), 401
+        return jsonify({
+            "message": "Unauthorized access"
+        }), 401
     contracts = Contract.query.filter_by(customer_id=customer_id).all()
     return jsonify(
         [
@@ -51,12 +55,16 @@ def get_contracts_by_customer_id(customer_id):
 def get_contract_details_by_customer_id(customer_id, contract_id):
     user = get_jwt_identity()
     if not user:
-        return jsonify({"message": "Unauthorized access"}), 401
+        return jsonify({
+            "message": "Unauthorized access"
+        }), 401
 
     contract = Contract.query.filter_by(customer_id=customer_id, contract_id=contract_id).first()
 
     if not contract:
-        return jsonify({"message": "Contract not found"}), 404
+        return jsonify({
+            "message": "Contract not found"
+        }), 404
 
     return jsonify({
         "contract_id": contract.contract_id,
@@ -70,16 +78,27 @@ def get_contract_details_by_customer_id(customer_id, contract_id):
 def update_contract_by_customer_id(customer_id, contract_id):
     user = get_jwt_identity()
     if not user:
-        return jsonify({"message": "Unauthorized access"}), 401
+        return jsonify({
+            "message": "Unauthorized access"
+        }), 401
+
     contract_data = request.json
     if not all([contract_data.get("contract_name"),
                 contract_data.get("customer_id")]):
-        return jsonify({"message": "contract_name and customer_id are required"}), 400
+        return jsonify({
+            "message": "contract_name and customer_id are required"
+        }), 400
+
     contract = Contract.query.filter_by(customer_id=customer_id, contract_id=contract_id).first()
     if not contract:
-        return jsonify({"message": "contract not found or unauthorized"}), 404
+        return jsonify({
+            "message": "contract not found or unauthorized"
+        }), 404
+
     contract.contract_name = contract_data.get("contract_name")
     contract.customer_id = contract_data.get("customer_id")
     db.session.commit()
 
-    return jsonify({"message": "Blog updated successfully"}), 200
+    return jsonify({
+        "message": "Blog updated successfully"
+    }), 200

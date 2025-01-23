@@ -9,13 +9,13 @@ from config import config
 
 def create_app():
     app = Flask(__name__)
+
     CORS(app, resources={r"/*": {"origins": "*"}},
          methods=["GET", "POST", "PUT", "DELETE", "OPTIONS"],
          allow_headers=["Content-Type", "Authorization"],
          supports_credentials=True)
 
     app.config.from_object(config.Config)
-
     db.init_app(app)
     jwt.init_app(app)
 
@@ -24,7 +24,7 @@ def create_app():
     app.register_blueprint(auth_route, url_prefix="/auth")
 
 
-    @app.errorhandler(404)
+    @app.errorhandler("/*")
     def not_found(e):
         return {"error": "Not found"}, 404
 

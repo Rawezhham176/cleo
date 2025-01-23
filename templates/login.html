@@ -25,10 +25,8 @@
     <form id="login-form">
         <label for="username">Username:</label>
         <input type="text" id="username" name="username" required>
-
         <label for="password">Password:</label>
         <input type="password" id="password" name="password" required>
-
         <button type="submit">Login</button>
     </form>
 
@@ -37,7 +35,6 @@
 
         loginForm.addEventListener("submit", async (event) => {
             event.preventDefault();
-
             const username = document.getElementById("username").value;
             const password = document.getElementById("password").value;
 
@@ -50,10 +47,10 @@
 
                 if (response.ok) {
                     const data = await response.json();
-                    const token = data.access_token; // Save the token in localStorage
+                    const token = data.access_token;
                     localStorage.setItem("token", token);
                     alert("Login successful!");
-                    window.location.href = "/table"; // Redirect to table.html
+                    window.location.href = "/table";
                 } else {
                     alert("Login failed!");
                 }
