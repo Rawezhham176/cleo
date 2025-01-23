@@ -36,16 +36,17 @@ def add_contract():
             "message": "Unauthorized access"
         }), 401
     contract_data = request.json
-    if not all([contract_data.get("contract_name"),
-                contract_data.get("customer_surname")]):
+    if not all([contract_data.get("contract_id"),
+                contract_data.get("contract_name"),
+                contract_data.get("customer_id")]):
         return jsonify({
             "message": "contract_name and customer_relation_id are required"
         }), 400
 
-    customer_id = Customer.query.filter_by(customer_surname=contract_data["customer_surname"]).first().customer_id
     new_contract = Contract(
+        contract_id=contract_data["contract_id"],
         contract_name=contract_data["contract_name"],
-        customer_id=customer_id
+        customer_id=contract_data["customer_id"]
     )
 
     db.session.add(new_contract)

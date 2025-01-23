@@ -10,8 +10,9 @@ class Contract(db.Model):
     customer_id = db.Column(db.String(36), ForeignKey("customer.customer_id"), nullable=False)
     date_created = db.Column(db.String(36), nullable=False)
 
-    def __init__(self,contract_name, customer_id):
+    def __init__(self,contract_name, customer_id, contract_id):
         self.contract_name = contract_name
+        self.contract_id = contract_id
         self.customer_id = customer_id
         self.date_created = datetime.now().strftime("%Y-%m-%d")
 

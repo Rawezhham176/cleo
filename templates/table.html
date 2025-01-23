@@ -72,7 +72,7 @@
             }
 
             try {
-                const response = await fetch("http://127.0.0.1:5000/contracts/all_contracts", {
+                const response = await fetch("http://localhost:4000/contracts/all_contracts", {
                     method: "GET",
                     headers: {
                         "Content-Type": "application/json",
@@ -91,7 +91,6 @@
             }
         }
 
-        // Populate Table
         function populateTable(data) {
             dataTableBody.innerHTML = "";
             data.forEach((item) => {
@@ -138,7 +137,7 @@
             };
 
             try {
-                const response = await fetch(`http://127.0.0.1:5000/customers/${oldVersion.customer_id}/contracts/${contractId}`, {
+                const response = await fetch(`http://localhost:4000/customers/${oldVersion.customer_id}/contracts/${contractId}`, {
                     method: "PUT",
                     headers: {
                         "Content-Type": "application/json",
@@ -162,7 +161,6 @@
                 statusMessage.style.color = "red";
             }
         });
-
         window.onload = loadTableData;
     </script>
 </body>
