@@ -22,6 +22,7 @@ or when you are in pycharm, just click on the run button inside app.py
 Open [http://localhost:4000] with your browser and you can login yourself
 Or just call the api endpoints within postman. There is a list of the api down here.
 
+#### Before you start create a user for yourself to login and use the api. You can do that with `/auth/register`
 
 ### Project Structure
 + `/database` here you will find an instance of the database. (SQLite)
